@@ -15,8 +15,8 @@ jobs:
           mkdir release
           find src -name '*.package' -exec cp -prv '{}' release ';'
 
-      - name: Zip release/ into release.zip
-        run: zip release release/*.package
+      - name: Zip release/ into greggs-stuff-pack.zip
+        run: zip greggs-stuff-pack release/*.package
 
       - name: Create release
         id: create_release
@@ -29,7 +29,7 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload release.zip asset to the release
+      - name: Upload greggs-stuff-pack.zip asset to the release
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -37,6 +37,6 @@ jobs:
         with:
           # This pulls from the CREATE RELEASE step above
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release.zip
-          asset_name: release.zip
+          asset_path: ./greggs-stuff-pack.zip
+          asset_name: greggs-stuff-pack.zip
           asset_content_type: application/zip
