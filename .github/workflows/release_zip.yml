@@ -1,7 +1,8 @@
 name: Release .zip file
 on:
   push:
-    branches: [main]
+    tags:
+    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 jobs:
   release_zip:
     runs-on: ubuntu-latest
@@ -9,19 +10,32 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Copy .package files from src into build folder
-      - name: Copy files from src/ into temporary build/ folder
+      - name: Copy .package files from src/ into temporary build/ folder
         run: |
           mkdir build
           find src/ -name '*.package' -exec cp -prv '{}' 'build/' ';'
 
-      # Grab files from build/ folder and release in a ZIP folder
-      - name: Zip and Release
-        uses: thedoctor0/zip-release@master
+      - name: Zip the build
+        run: zip --junk-paths release build/
+      
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          filename: 'release.zip'
-          path: 'build'
-
-      # Remove the build folder
-      - name: Tidy up
-        run: rm -rf build/
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./release.zip
+          asset_name: release.zip
+          asset_content_type: application/zip
