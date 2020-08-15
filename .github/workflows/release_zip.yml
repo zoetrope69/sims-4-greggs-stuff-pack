@@ -10,13 +10,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Copy .package files from src/ into temporary release/ folder
+      - name: Copy .package files from src/ into temporary greggs-stuff-pack/ folder
         run: |
-          mkdir release
-          find src -name '*.package' -exec cp -prv '{}' release ';'
+          mkdir greggs-stuff-pack
+          find src -name '*.package' -exec cp -prv '{}' greggs-stuff-pack ';'
 
-      - name: Zip release/ into greggs-stuff-pack.zip
-        run: zip greggs-stuff-pack release/*.package
+      - name: Zip greggs-stuff-pack/ into greggs-stuff-pack.zip
+        run: zip greggs-stuff-pack greggs-stuff-pack/*.package
 
       - name: Create release
         id: create_release
