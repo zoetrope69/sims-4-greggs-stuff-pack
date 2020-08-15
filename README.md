@@ -1,5 +1,7 @@
 # Sims 4: Unofficial Greggs Stuff Pack
 
+![Fake Greggs Stuff Pack image. It has the Greggs sign, and two people in the Greggs apron and uniforms.](./resources/stuff-pack.jpg)
+
 This is a work-in-progress stuff pack to make your very own [UK based bakery chain Greggs](https://www.greggs.co.uk/) in the Sims.
 
 This is not endorsed by Greggs at all, but if they want to give me a lifetime supply of vegan sausage rolls they are more than welcome too.
