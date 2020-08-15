@@ -1,5 +1,6 @@
 # Sims 4: Unofficial Greggs Stuff Pack
-![Release .zip file](https://github.com/zaccolley/sims-4-greggs-stuff-pack/workflows/Release%20.zip%20file/badge.svg)
+
+[![Release .zip file](https://github.com/zaccolley/sims-4-greggs-stuff-pack/workflows/Release%20.zip%20file/badge.svg)](https://github.com/zaccolley/sims-4-greggs-stuff-pack/releases)
 
 ![Fake Greggs Stuff Pack image. It has the Greggs sign, and two people in the Greggs apron and uniforms.](./resources/stuff-pack.jpg)
 
